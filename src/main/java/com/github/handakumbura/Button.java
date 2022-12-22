@@ -11,44 +11,24 @@ package com.github.handakumbura;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
-public class CheckBox implements WrapsElement {
+public class Button implements WrapsElement {
     private final WebElement element;
 
     /***
-     * An abstraction to handle a HTML checkbox element.
+     * An abstraction to handle a HTML button element.
      * @param element WebElement instance for the checkbox.
      */
-    public CheckBox(WebElement element) {
+    public Button(WebElement element) {
         this.element = element;
     }
 
 
     /***
-     * Toggles the checkbox.
+     * Clicks the button.
      * @return The current instance of the WebElement.
      */
-    public CheckBox toggle() {
+    public Button click() {
         element.click();
-        return this;
-    }
-
-    /***
-     * Un-Toggles the checkbox.
-     * @return The current instance of the WebElement.
-     */
-    public CheckBox unToggle() {
-        if (element.isSelected()) {
-            element.click();
-        }
-
-        return this;
-    }
-
-    /***
-     * A sugar method that can be used to improve readability of code.
-     * @return The current instance of the WebElement.
-     */
-    public CheckBox and() {
         return this;
     }
 
@@ -58,6 +38,14 @@ public class CheckBox implements WrapsElement {
      */
     public boolean isDisplayed() {
         return element.isDisplayed();
+    }
+
+    /***
+     * A sugar method that can be used to improve readability of code.
+     * @return The current instance of the WebElement.
+     */
+    public Button and() {
+        return this;
     }
 
     /***

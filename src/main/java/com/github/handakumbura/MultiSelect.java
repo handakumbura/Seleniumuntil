@@ -30,4 +30,12 @@ public class MultiSelect extends Select {
         return this;
     }
 
+    /***
+     * Checks if the element is displayed.
+     * @return The current instance of the WebElement.
+     */
+    public boolean isDisplayed() {
+        return getWrappedElement().isDisplayed();
+    }
+
 }
