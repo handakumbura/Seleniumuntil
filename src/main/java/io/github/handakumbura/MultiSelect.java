@@ -6,29 +6,27 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-package com.github.handakumbura;
+package io.github.handakumbura;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.support.ui.Select;
 
-public class Button implements WrapsElement {
-    private final WebElement element;
+public class MultiSelect extends Select {
+
 
     /***
-     * An abstraction to handle a HTML button element.
-     * @param element WebElement instance for the checkbox.
+     * An abstraction to handle a HTML multiselect element.
+     * @param element WebElement instance for the multiselect.
      */
-    public Button(WebElement element) {
-        this.element = element;
+    public MultiSelect(WebElement element) {
+        super(element);
     }
 
-
     /***
-     * Clicks the button.
+     * A sugar method that can be used to improve readability of code.
      * @return The current instance of the WebElement.
      */
-    public Button click() {
-        element.click();
+    public MultiSelect and() {
         return this;
     }
 
@@ -37,24 +35,7 @@ public class Button implements WrapsElement {
      * @return The current instance of the WebElement.
      */
     public boolean isDisplayed() {
-        return element.isDisplayed();
+        return getWrappedElement().isDisplayed();
     }
 
-    /***
-     * A sugar method that can be used to improve readability of code.
-     * @return The current instance of the WebElement.
-     */
-    public Button and() {
-        return this;
-    }
-
-    /***
-     * Returns the WebElement passed in at instantiation of the object.
-     * @return The current WebElement.
-     * @return The current WebElement object.
-     */
-    @Override
-    public WebElement getWrappedElement() {
-        return this.element;
-    }
 }

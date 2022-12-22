@@ -1,4 +1,3 @@
-
 /*
 Copyright 2022 Dumidu Handakumbura
 
@@ -7,49 +6,41 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-package com.github.handakumbura;
+package io.github.handakumbura;
 
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.WrapsElement;
 
-import java.util.List;
-
-public class RadioButton {
-    private final List<WebElement> elements;
-    private final String VALUE = "value";
+public class CheckBox implements WrapsElement {
+    private final WebElement element;
 
     /***
-     * An abstraction to handle a HTML radio button group.
-     * @param element A list of WebElements that represent a radio button group.
+     * An abstraction to handle a HTML checkbox element.
+     * @param element WebElement instance for the checkbox.
      */
-    public RadioButton(List<WebElement> element) {
-        this.elements = element;
+    public CheckBox(WebElement element) {
+        this.element = element;
     }
 
+
     /***
-     * Selects the radio button option based on the index (starting at zero).
-     * @param index The index of the option.
+     * Toggles the checkbox.
      * @return The current instance of the WebElement.
      */
-    public RadioButton clickByIndex(int index) {
-        elements.get(index).click();
+    public CheckBox toggle() {
+        element.click();
         return this;
     }
 
     /***
-     * Selects the radio button option based on the value attribute.
-     * @param value the expected value attribute as a String.
+     * Un-Toggles the checkbox.
      * @return The current instance of the WebElement.
      */
-    public RadioButton clickByValue(String value) {
-        for (int x = 0; x < elements.size(); x++) {
-            if (elements.get(x).getAttribute(VALUE).equals(value)) {
-                elements.get(x).click();
-                break;
-            } else if (!(elements.get(x).getAttribute(VALUE).equals(value)) && x == elements.size() - 1) {
-                throw new NoSuchElementException("An element was not found for the given value attribute");
-            }
+    public CheckBox unToggle() {
+        if (element.isSelected()) {
+            element.click();
         }
+
         return this;
     }
 
@@ -57,16 +48,25 @@ public class RadioButton {
      * A sugar method that can be used to improve readability of code.
      * @return The current instance of the WebElement.
      */
-    public RadioButton and() {
+    public CheckBox and() {
         return this;
     }
 
     /***
-     * Returns the WebElements list passed in at instantiation of the object.
-     * @return The current WebElements list.
+     * Checks if the element is displayed.
+     * @return The current instance of the WebElement.
      */
-    public List<WebElement> getWrappedElement() {
-        return this.elements;
+    public boolean isDisplayed() {
+        return element.isDisplayed();
     }
 
+    /***
+     * Returns the WebElement passed in at instantiation of the object.
+     * @return The current WebElement.
+     * @return The current WebElement object.
+     */
+    @Override
+    public WebElement getWrappedElement() {
+        return this.element;
+    }
 }
