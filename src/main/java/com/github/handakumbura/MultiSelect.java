@@ -9,56 +9,25 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 package com.github.handakumbura;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
+import org.openqa.selenium.support.ui.Select;
 
-public class CheckBox implements WrapsElement {
-    private final WebElement element;
-
-    /***
-     * An abstraction to handle a HTML checkbox element.
-     * @param element WebElement instance for the checkbox.
-     */
-    public CheckBox(WebElement element) {
-        this.element = element;
-    }
+public class MultiSelect extends Select {
 
 
     /***
-     * Toggles the checkbox.
-     * @return The current instance of the WebElement.
+     * An abstraction to handle a HTML multiselect element.
+     * @param element WebElement instance for the multiselect.
      */
-    public CheckBox toggle() {
-        element.click();
-        return this;
-    }
-
-    /***
-     * Un-Toggles the checkbox.
-     * @return The current instance of the WebElement.
-     */
-    public CheckBox unToggle() {
-        if (element.isSelected()) {
-            element.click();
-        }
-
-        return this;
+    public MultiSelect(WebElement element) {
+        super(element);
     }
 
     /***
      * A sugar method that can be used to improve readability of code.
      * @return The current instance of the WebElement.
      */
-    public CheckBox and() {
+    public MultiSelect and() {
         return this;
     }
 
-    /***
-     * Returns the WebElement passed in at instantiation of the object.
-     * @return The current WebElement.
-     * @return The current WebElement object.
-     */
-    @Override
-    public WebElement getWrappedElement() {
-        return this.element;
-    }
 }
