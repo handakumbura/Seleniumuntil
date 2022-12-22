@@ -1,3 +1,4 @@
+
 /*
 Copyright 2022 Dumidu Handakumbura
 
@@ -8,39 +9,47 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 package com.github.handakumbura;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.WrapsElement;
 
-public class CheckBox implements WrapsElement {
-    private final WebElement element;
+import java.util.List;
+
+public class RadioButton {
+    private final List<WebElement> elements;
+    private final String VALUE = "value";
 
     /***
-     * An abstraction to handle a HTML checbox element.
-     * @param element WebElement instance for the checkbox.
+     * An abstraction to handle a HTML radio button group.
+     * @param element A list of WebElements that represent a radio button group.
      */
-    public CheckBox(WebElement element) {
-        this.element = element;
+    public RadioButton(List<WebElement> element) {
+        this.elements = element;
     }
 
-
     /***
-     * Toggles the checkbox.
+     * Selects the radio button option based on the index (starting at zero).
+     * @param index The index of the option.
      * @return The current instance of the WebElement.
      */
-    public CheckBox toggle() {
-        element.click();
+    public RadioButton clickByIndex(int index) {
+        elements.get(index).click();
         return this;
     }
 
     /***
-     * Un-Toggles the checkbox.
+     * Selects the radio button option based on the value attribute.
+     * @param value the expected value attribute as a String.
      * @return The current instance of the WebElement.
      */
-    public CheckBox unToggle() {
-        if (element.isSelected()) {
-            element.click();
+    public RadioButton clickByValue(String value) {
+        for (int x = 0; x < elements.size(); x++) {
+            if (elements.get(x).getAttribute(VALUE).equals(value)) {
+                elements.get(x).click();
+                break;
+            } else if (!(elements.get(x).getAttribute(VALUE).equals(value)) && x == elements.size() - 1) {
+                throw new NoSuchElementException("An element was not found for the given value attribute");
+            }
         }
-
         return this;
     }
 
@@ -48,17 +57,16 @@ public class CheckBox implements WrapsElement {
      * A sugar method that can be used to improve readability of code.
      * @return The current instance of the WebElement.
      */
-    public CheckBox and() {
+    public RadioButton and() {
         return this;
     }
 
     /***
-     * Returns the WebElement passed in at instantiation of the object.
-     * @return The current WebElement.
-     * @return The current WebElement object.
+     * Returns the WebElements list passed in at instantiation of the object.
+     * @return The current WebElements list.
      */
-    @Override
-    public WebElement getWrappedElement() {
-        return this.element;
+    public List<WebElement> getWrappedElement() {
+        return this.elements;
     }
+
 }
