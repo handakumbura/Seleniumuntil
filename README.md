@@ -21,4 +21,5 @@ radioButton.clickByValue("Dinner");	`
 The idea is to create abstractions for all common HTML5 elements as well as provide other useful utilities such as ExpectedConditions that are not available OOTB and custome locators. Please follow the link[2] below if you would like to collaborate with me on this project.
 
 [1] - https://search.maven.org/artifact/io.github.handakumbura/Seleniumutil
+
 [2] - https://docs.google.com/document/d/1Diudxs53eL8QkfYwHpExkusEtpJxF0mDHVrr6XymXYE/edit?usp=sharing
