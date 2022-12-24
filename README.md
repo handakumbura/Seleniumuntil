@@ -7,13 +7,19 @@ Selenium Util library provides element level abstractions so that you don’t ha
 1. Include the library as a dependency[1] (e.g. maven),
 
 `<dependency>
+
   <groupId>io.github.handakumbura</groupId>
+  
   <artifactId>Seleniumutil</artifactId>
+  
   <version>0.5.0</version>
+  
 </dependency>`
 
 2. Instantiate an object of the element wrapper passing in the WebElement as a parameter. Then use the built in methods to manipulate the element.
+
 `RadioButton radioButton = new RadioButton(driver.findElements(RADIO_BUTTON_GROUP_XPATH));
+
 radioButton.clickByValue("Dinner");	` 
 
 # How do you contribute to the project?
