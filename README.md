@@ -4,7 +4,7 @@
 Selenium Util library provides element level abstractions so that you don’t have to. The library can help improve readability and reduce redundancy of your page layer code. 
 
 # How do you use Selenium Util?
-1. Include the library as a dependency (e.g. maven),
+1. Include the library as a dependency[1] (e.g. maven),
 
 `<dependency>
   <groupId>io.github.handakumbura</groupId>
@@ -18,6 +18,7 @@ Selenium Util library provides element level abstractions so that you don’t ha
 radioButton.clickByValue("Dinner");	` 
 
 # How do you contribute to the project?
-The idea is to create abstractions for all common HTML5 elements as well as provide other useful utilities such as ExpectedConditions that are not available OOTB and custome locators. Please follow the link[1] below if you would like to collaborate with me on this project.
+The idea is to create abstractions for all common HTML5 elements as well as provide other useful utilities such as ExpectedConditions that are not available OOTB and custome locators. Please follow the link[2] below if you would like to collaborate with me on this project.
 
-[1] - https://docs.google.com/document/d/1Diudxs53eL8QkfYwHpExkusEtpJxF0mDHVrr6XymXYE/edit?usp=sharing
+[1] - https://search.maven.org/artifact/io.github.handakumbura/Seleniumutil
+[2] - https://docs.google.com/document/d/1Diudxs53eL8QkfYwHpExkusEtpJxF0mDHVrr6XymXYE/edit?usp=sharing
