@@ -1,6 +1,6 @@
 [![Maven Central](https://img.shields.io/maven-central/v/io.github.handakumbura/Seleniumutil.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22io.github.handakumbura%22%20AND%20a:%22Seleniumutil%22)
 
-# Why should I Selenium Util?
+# Why should I use Selenium Util?
 Selenium Util library provides element level abstractions so that you don’t have to. The library can help improve readability and reduce redundancy of your page layer code. 
 
 # How can I use Selenium Util?
