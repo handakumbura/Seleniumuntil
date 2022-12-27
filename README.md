@@ -18,7 +18,6 @@ Selenium Util library provides element level abstractions so that you don’t ha
 radioButton.clickByValue("Dinner");`
 
 `Table table = new Table(driver,locator);
-
  table.getColumnHeaders();
  table.getValuesForAGivenRow(1);
  table.getValuesForAGivenRowAndColumn(1,2);
