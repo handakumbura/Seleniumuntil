@@ -12,10 +12,17 @@ Selenium Util library provides element level abstractions so that you don’t ha
   <version>0.5.0</version>
 </dependency>`
 
-2. Then, instantiate an object of the element wrapper passing in the WebElement as a parameter. Then use the built in methods to manipulate the element.
+2. Then, instantiate an object of the element wrapper passing in the required parameter. Then use the built in methods to manipulate the element.
 
 `RadioButton radioButton = new RadioButton(driver.findElements(RADIO_BUTTON_GROUP_XPATH));
-radioButton.clickByValue("Dinner");	` 
+radioButton.clickByValue("Dinner");`
+
+`Table table = new Table(driver,locator);
+
+ table.getColumnHeaders();
+ table.getValuesForAGivenRow(1);
+ table.getValuesForAGivenRowAndColumn(1,2);
+ table.getAllValues();`
 
 # How can I contribute to the project?
 The idea is to create abstractions for all common HTML5 elements as well as provide other useful utilities such as ExpectedConditions that are not available OOTB and custome locators. Please follow the link[2] below if you would like to collaborate with me on this project.
