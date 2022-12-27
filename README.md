@@ -17,7 +17,7 @@ Selenium Util library provides element level abstractions so that you don’t ha
 `RadioButton radioButton = new RadioButton(driver.findElements(RADIO_BUTTON_GROUP_XPATH));
 radioButton.clickByValue("Dinner");`
 
-`Table table = new Table(driver,locator);
+`Table table = new Table(driver,LOCATOR);
  table.getColumnHeaders();
  table.getValuesForAGivenRow(1);
  table.getValuesForAGivenRowAndColumn(1,2);
