@@ -3,7 +3,7 @@ package io.github.handakumbura;
 /***
  * The list is implemented based on https://www.w3schools.com/jsref/dom_obj_event.asp
  */
-public enum EventListeners {
+public enum EventListener {
 
     ABORT("abort"),
     AFTERPRINT("afterprint"),
@@ -161,7 +161,13 @@ public enum EventListeners {
     WHICH("which"),
     VIEW("view");
 
+    private final String event;
 
-    EventListeners(String s) {
+    EventListener(String event) {
+        this.event = event;
+    }
+
+    public String toString() {
+        return event;
     }
 }
