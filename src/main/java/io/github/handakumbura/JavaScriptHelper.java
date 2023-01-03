@@ -29,7 +29,7 @@ public class JavaScriptHelper {
      * @param jsFunction the function as a string.
      */
     public void attachASnippetAsAEventCallBack(String cssSelector, EventListener eventListener, String jsFunction) {
-        executor.executeScript(String.format(EVENT_LISTENER_SNIPPET, cssSelector, EventListener.CLICK, jsFunction));
+        executor.executeScript(String.format(EVENT_LISTENER_SNIPPET, cssSelector, eventListener, jsFunction));
     }
 
     /**
