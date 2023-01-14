@@ -9,6 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 package io.github.handakumbura;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -26,6 +27,7 @@ public class Table {
     private final String TABLE_COLUMN_XPATH_POSTFIX_TEMPLATE = "[%s]/child::td";
     private By locator;
     private WebDriver driver;
+    private final String ELEMENT_NAME = "table";
 
     /***
      * An abstraction for the HTML table element.
@@ -34,6 +36,9 @@ public class Table {
     public Table(WebDriver driver, By locator) {
         this.driver = driver;
         this.locator = locator;
+        if (!driver.findElement(locator).getTagName().equalsIgnoreCase(ELEMENT_NAME)) {
+            throw new NoSuchElementException("The web element provided as an input parameter is not of type \t" + ELEMENT_NAME);
+        }
     }
 
     /**
