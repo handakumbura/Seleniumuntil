@@ -8,17 +8,22 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 package io.github.handakumbura;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WrapsElement;
 
 public class Button implements WrapsElement {
     private final WebElement element;
+    private final String ELEMENT_NAME = "button";
 
     /***
      * An abstraction to handle a HTML button element.
      * @param element WebElement instance for the checkbox.
      */
     public Button(WebElement element) {
+        if (!element.getTagName().equalsIgnoreCase(ELEMENT_NAME)) {
+            throw new NoSuchElementException("The web element provided as an input parameter is not of type \t" + ELEMENT_NAME);
+        }
         this.element = element;
     }
 
