@@ -9,13 +9,14 @@ import java.util.concurrent.TimeUnit;
 public class JavaScriptHelper {
     private JavascriptExecutor executor;
     private final String PAUSE_WINDOW_SNIPPET = "window.setTimeout(arguments[arguments.length - 1], %s);";
-    private final String INNER_HTML_SNIPPET = "document.querySelector('%s').innerHTML='%s'";
-    private final String EVENT_LISTENER_SNIPPET = "document.querySelector('%s').addEventListener('%s',%s)";
-
-    private final String EVENT_HANDLER_TARGET_VALUE_SNIPPET = "window.radio; document.querySelectorAll('%s').forEach(elem => {elem.addEventListener('click',function(e){ window.radio = e.target.defaultValue})});";
-    private final int MAX_SCRIPT_WAIT_DURATION = 120;
+    private final String INNER_HTML_SNIPPET = "document.querySelector('%s').innerHTML = '%s';";
+    private final String EVENT_LISTENER_SNIPPET = "document.querySelector('%s').addEventListener('%s', function(e) {%s; });";
+    private final String EVENT_HANDLER_TARGET_VALUE_SNIPPET = "window.radio; document.querySelectorAll('%s').forEach(elem => {elem.addEventListener('click', function(e) { window.radio = e.target.defaultValue})});";
 
     private final String NAME_OF_RADIO_BUTTON_VALUE_VARIABLE = "window.radio";
+    private final int MAX_SCRIPT_WAIT_DURATION = 120;
+
+
 
     /***
      * Provides a few common javascript snippets as java functions.
