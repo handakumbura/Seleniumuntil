@@ -48,7 +48,6 @@ public class JavaScriptHelper {
      */
     public void attachASnippetAsAEventCallBack(String cssSelector, EventListener eventListener, String jsFunction) {
         String snippet = String.format(EVENT_LISTENER_SNIPPET, cssSelector, eventListener, jsFunction);
-        parseJavaScript(snippet);
         executor.executeScript(snippet);
     }
 
@@ -62,7 +61,6 @@ public class JavaScriptHelper {
     public void appendAnHTMLBlockAsAChild(String htmlBlock, String cssSelector) throws IOException, SAXException {
         String snippet = String.format(INNER_HTML_SNIPPET, cssSelector, htmlBlock);
         parseHTMLBlock(htmlBlock);
-        parseJavaScript(snippet);
         executor.executeScript(snippet);
     }
 
@@ -102,12 +100,6 @@ public class JavaScriptHelper {
     private int parseJavaScript(String snippet) {
         JSLintBuilder jsLintBuilder = new JSLintBuilder();
         JSLint lint = jsLintBuilder.fromDefault();
-
-        List<Issue> issues = lint.lint("test.js", snippet).getIssues();
-
-        for (Issue issue : issues) {
-            System.out.println(issue.toString());
-        }
 
         return lint.lint("test.js", snippet).getIssues().size();
     }
