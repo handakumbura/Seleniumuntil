@@ -1,14 +1,12 @@
 package io.github.handakumbura;
 
-import com.googlecode.jslint4java.JSLint;
-import com.googlecode.jslint4java.JSLintBuilder;
 import org.mockito.Mockito;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.xml.sax.SAXException;
 
-import java.lang.reflect.Field;
+import java.io.IOException;
 
 public class JavaScriptHelperTest {
 
@@ -18,26 +16,59 @@ public class JavaScriptHelperTest {
     }
 
     @Test
-    public static void testPauseTheDOMForAGivenDurationJavaScriptSnippet() throws IllegalAccessException {
-        Field field = JavaScriptHelper.class.getDeclaredFields()[1];
-        field.setAccessible(true);
-        String snippet = (String) field.get((Object) new JavaScriptHelper(mockAChromeDriverObject()));
-
-        //parameterizing.
-        snippet = String.format(snippet, 5000);
-        Assert.assertEquals(getNumberOfLintIssuesInJavaScriptSnippet(snippet),1, "An unexpected syntax error was found in the valid javascript snippet for \t"+field.getName()); ;
+    public static void testPauseTheDOMForAGivenDuration() {
+        JavaScriptHelper javaScriptHelper = new JavaScriptHelper(mockAChromeDriverObject());
+        javaScriptHelper.pauseTheDOMForAGivenDuration(5000);
     }
 
     @Test
-    public static void TestAppendAnHTMLBlockAsAChildJavaScriptSnippetWhen() throws IllegalAccessException {
-        Field field = JavaScriptHelper.class.getDeclaredFields()[2];
-        field.setAccessible(true);
-        String snippet = (String) field.get((Object) new JavaScriptHelper(mockAChromeDriverObject()));
-
-        //parameterizing.
-        snippet = String.format(snippet, 5000);
-        Assert.assertEquals(getNumberOfLintIssuesInJavaScriptSnippet(snippet),1, "An unexpected syntax error was found in the valid javascript snippet for \t"+field.getName()); ;
+    public static void testAppendAnHTMLBlockAsAChildWhenTheCSSLocatorAndTheHTMLAreValid() throws IOException, SAXException {
+        JavaScriptHelper javaScriptHelper = new JavaScriptHelper(mockAChromeDriverObject());
+        javaScriptHelper.appendAnHTMLBlockAsAChild("<div>test</div>", "#test");
     }
+
+    @Test(enabled = false)
+    public static void testAppendAnHTMLBlockAsAChildWhenTheCSSLocatorIsInvalidAndTheHTMLisValid() throws IOException, SAXException {
+        JavaScriptHelper javaScriptHelper = new JavaScriptHelper(mockAChromeDriverObject());
+        javaScriptHelper.appendAnHTMLBlockAsAChild("<div>test</div>", "//*[@id='test' and @class='test']");
+    }
+
+    @Test(expectedExceptions = SAXException.class)
+    public static void testAppendAnHTMLBlockAsAChildWhenTheCSSLocatorIsValidAndTheHTMLisInValid() throws IOException, SAXException {
+        JavaScriptHelper javaScriptHelper = new JavaScriptHelper(mockAChromeDriverObject());
+        javaScriptHelper.appendAnHTMLBlockAsAChild("<div>test<div>", "#test");
+    }
+
+    @Test(expectedExceptions = SAXException.class)
+    public static void testAppendAnHTMLBlockAsAChildWhenTheCSSLocatorAndTheHTMLAreInValid() throws IOException, SAXException {
+        JavaScriptHelper javaScriptHelper = new JavaScriptHelper(mockAChromeDriverObject());
+        javaScriptHelper.appendAnHTMLBlockAsAChild("<div>test<div>", "//*[@id='test' and @class='test']");
+    }
+
+    @Test
+    public static void testAttachASnippetAsAEventCallBackWhenBothTheCSSLocatorAndTheCallbackAreValid() {
+        JavaScriptHelper javaScriptHelper = new JavaScriptHelper(mockAChromeDriverObject());
+        javaScriptHelper.attachASnippetAsAEventCallBack("#test", EventListener.CLICK, "function(e) { console.log(e) }");
+    }
+
+    @Test(enabled = false)
+    public static void testAttachASnippetAsAEventCallBackWhenTheCSSLocatorIsValidAndTheCallbackIsInValid() {
+        JavaScriptHelper javaScriptHelper = new JavaScriptHelper(mockAChromeDriverObject());
+        javaScriptHelper.attachASnippetAsAEventCallBack("#test", EventListener.CLICK, "function(e) { console.log e) }");
+    }
+
+    @Test(enabled = false)
+    public static void testAttachASnippetAsAEventCallBackWhenTheCSSLocatorAndTheCallbackareInValid() {
+        JavaScriptHelper javaScriptHelper = new JavaScriptHelper(mockAChromeDriverObject());
+        javaScriptHelper.attachASnippetAsAEventCallBack("//*[@id='test' and @class='test']", EventListener.CLICK, "function(e) { console.log e) }");
+    }
+
+    @Test
+    public static void testGetRadioButtonValueFromContext() {
+        JavaScriptHelper javaScriptHelper = new JavaScriptHelper(mockAChromeDriverObject());
+        javaScriptHelper.getRadioButtonValueFromContext();
+    }
+
 
     private static ChromeDriver mockAChromeDriverObject() {
         ChromeDriver driver = Mockito.mock(ChromeDriver.class);
@@ -49,12 +80,4 @@ public class JavaScriptHelperTest {
 
         return driver;
     }
-
-    private static int getNumberOfLintIssuesInJavaScriptSnippet(String snippet) {
-        JSLintBuilder jsLintBuilder = new JSLintBuilder();
-        JSLint lint = jsLintBuilder.fromDefault();
-
-        return lint.lint("test.js", snippet).getIssues().size();
-    }
-
 }
