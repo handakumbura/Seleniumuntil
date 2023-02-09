@@ -80,9 +80,9 @@ public class JavaScriptHelper {
      *  Attaches an event listener to the members of a given radio group to store the user selection in a window object.
      * @param cssSelector By CSS Locator object of the radio group.
      */
-    public void storeRadioButtonValueInContext(By.ByCssSelector cssSelector) {
+    public void storeRadioButtonValueInContext(By cssSelector) {
         String snippet = String.format(EVENT_HANDLER_TARGET_VALUE_SNIPPET, LocatorHelper.getValueOfCSSSelectorAsAString(cssSelector));
-        if (parseJavaScript(snippet) > 1) {
+        if (parseJavaScript(snippet) > 5) {
             throw new JavascriptException("Syntax error: \t" + snippet);
         }
         executor.executeScript(snippet);

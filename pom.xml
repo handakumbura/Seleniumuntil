@@ -134,6 +134,7 @@
   </properties>
 
   <dependencies>
+
     <dependency>
       <groupId>com.googlecode.jslint4java</groupId>
       <artifactId>jslint4java</artifactId>
