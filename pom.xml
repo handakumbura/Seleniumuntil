@@ -6,7 +6,7 @@
 
   <groupId>io.github.handakumbura</groupId>
   <artifactId>Seleniumutil</artifactId>
-  <version>0.7.6</version>
+  <version>0.7.7</version>
 
   <name>SeleniumUtil</name>
   <description>A collection of wrappers and utility classes to be used alongside the Selenium Web Driver</description>
