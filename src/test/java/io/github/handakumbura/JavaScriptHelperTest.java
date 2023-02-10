@@ -1,6 +1,7 @@
 package io.github.handakumbura;
 
 import org.mockito.Mockito;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
@@ -69,6 +70,11 @@ public class JavaScriptHelperTest {
         javaScriptHelper.getRadioButtonValueFromContext();
     }
 
+    @Test
+    public static void storeRadioButtonValueInContext() {
+        JavaScriptHelper javaScriptHelper = new JavaScriptHelper(mockAChromeDriverObject());
+        javaScriptHelper.storeRadioButtonValueInContext(By.cssSelector("#test"));
+    }
 
     private static ChromeDriver mockAChromeDriverObject() {
         ChromeDriver driver = Mockito.mock(ChromeDriver.class);

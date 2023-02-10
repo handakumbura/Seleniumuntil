@@ -9,7 +9,7 @@ public class LocatorHelper {
      * @param selector the CSS Selector.
      * @return the css locator value.
      */
-    public static String getValueOfCSSSelectorAsAString(By.ByCssSelector selector) {
+    public static String getValueOfCSSSelectorAsAString(By selector) {
         return selector.toString().split("By.cssSelector: ")[1];
     }
 }
